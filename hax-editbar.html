@@ -7,8 +7,7 @@
 <!--
 `hax-editable`
 
-
-@demo demo/index.html 
+@demo demo/index.html
 -->
 
 <dom-module id="hax-editbar">
@@ -16,7 +15,17 @@
     <style>
       :host {
         display: block;
-        position: relative;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        opacity: 0;
+        transition: opacity .3s ease-in-out;
+      }
+      :host:hover, :host:focus {
+        opacity: 1;
+      }
+      :host[edit] {
+        opacity: 1
       }
       paper-toolbar {
         --paper-toolbar-background: rgba(0,0,0, 0.3);
