@@ -31,6 +31,9 @@
       :host[edit] {
         opacity: 1
       }
+            :host[can-hax=false] {
+        display: none;
+      }
       paper-toolbar {
         --paper-toolbar-background: rgba(0,0,0, 0.8);
         text-align: right;
@@ -65,6 +68,10 @@
         origContent: {
           type: String
         },
+        canHax: {
+          type: Boolean,
+          value: false,
+        },
         showEdit: Boolean,
         showSave: Boolean
       },
@@ -74,13 +81,19 @@
         this.showSave = state ? true : false;
       },
       _editClicked: function() {
-        this.fire('action', {action: 'edit'});
+        var attributeArray = this.attributes;
+        attributeArray.tagName = this.tagName;
+        this.fire('action', {action: 'edit', attributes: attributeArray});
       },
       _saveClicked: function() {
-        this.fire('action', {action: 'save'});
+        var attributeArray = this.attributes;
+        attributeArray.tagName = this.tagName;
+        this.fire('action', {action: 'save', attributes: attributeArray});
       },
       _cancelClicked: function() {
-        this.fire('action', {action: 'cancel'});
+        var attributeArray = this.attributes;
+        attributeArray.tagName = this.tagName;
+        this.fire('action', {action: 'cancel', attributes: attributeArray});
       }
     });
   </script>
