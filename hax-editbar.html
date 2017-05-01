@@ -84,21 +84,21 @@
         let root = this.parentNode;
         var attributeArray = root.attributes;
         attributeArray.tagName = root.tagName;
-        attributeArray.innerHTML = root.innerText;
+        attributeArray.innerHTML = Polymer.dom(root).innerHTML;
         this.fire('haxAction', {action: 'edit', attributes: attributeArray});
       },
       _saveClicked: function() {
         let root = this.parentNode;
         var attributeArray = root.attributes;
         attributeArray.tagName = root.tagName;
-        attributeArray.innerHTML = root.innerText;
+        attributeArray.innerHTML = Polymer.dom(root).innerHTML;
         this.fire('haxAction', {action: 'save', attributes: attributeArray});
       },
       _cancelClicked: function() {
         let root = this.parentNode;
         var attributeArray = root.attributes;
         attributeArray.tagName = root.tagName;
-        attributeArray.innerHTML = root.innerText;
+        attributeArray.innerHTML = Polymer.dom(root).innerHTML;
         this.fire('haxAction', {action: 'cancel', attributes: attributeArray});
       }
     });
