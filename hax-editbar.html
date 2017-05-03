@@ -14,7 +14,7 @@
   <template>
     <style>
       :host {
-        display: block;
+        display: none;
         position: absolute;
         top: 0;
         left: 0;
@@ -31,8 +31,8 @@
       :host[edit] {
         opacity: 1
       }
-      :host[hide-hax] {
-        display: none;
+      :host[show-hax] {
+        display: block;
       }
       paper-toolbar {
         --paper-toolbar-background: rgba(0,0,0, 0.8);
@@ -68,9 +68,11 @@
         origContent: {
           type: String
         },
-        hideHax: {
+        showHax: {
           type: Boolean,
           value: false,
+          reflectToAttribute: true,
+          notify: true,
         },
         showEdit: Boolean,
         showSave: Boolean
@@ -82,14 +84,15 @@
       },
       _editClicked: function(e) {
         let root = this.parentNode;
-        var attributeArray = root.attributes;
+        var attributeArray = Polymer.dom(root).attributes;
+        console.log(attributeArray);
         attributeArray.tagName = root.tagName;
         attributeArray.innerHTML = Polymer.dom(root).innerHTML;
         this.fire('haxAction', {action: 'edit', attributes: attributeArray});
       },
       _saveClicked: function() {
         let root = this.parentNode;
-        var attributeArray = root.attributes;
+        var attributeArray = Polymer.dom(root).attributes;
         attributeArray.tagName = root.tagName;
         attributeArray.innerHTML = Polymer.dom(root).innerHTML;
         this.fire('haxAction', {action: 'save', attributes: attributeArray});
