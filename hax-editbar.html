@@ -14,7 +14,7 @@
   <template>
     <style>
       :host {
-        display: none;
+        display: block;
         position: absolute;
         top: 0;
         left: 0;
@@ -75,9 +75,13 @@
         },
         showEdit: {
           type: Boolean,
+          reflectToAttribute: true,
+          notify: true,
         },
         showSave: {
           type: Boolean,
+          reflectToAttribute: true,
+          notify: true,
         }
       },
       _editChanged: function(edit) {
@@ -87,10 +91,10 @@
       },
       _editClicked: function(e) {
         let root = this.parentNode;
-        var attributeArray = Polymer.dom(root).attributes;
-        console.log(attributeArray);
+        var attributeArray = root.attributes;
         attributeArray.tagName = root.tagName;
         attributeArray.innerHTML = Polymer.dom(root).innerHTML;
+        console.log(attributeArray);
         this.fire('haxAction', {action: 'edit', attributes: attributeArray});
       },
       _saveClicked: function() {
