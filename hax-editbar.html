@@ -31,15 +31,13 @@
       :host[edit] {
         opacity: 1
       }
-      :host[show-hax] {
-        display: block;
-      }
       paper-toolbar {
         --paper-toolbar-background: rgba(0,0,0, 0.8);
         text-align: right;
         justify-content: flex-end;
       }
     </style>
+    <template is="dom-if" if="{{showHax}}">
       <template is="dom-if" if="{{showEdit}}">
         <paper-toolbar>
           <paper-icon-button icon="lrn-icons:edit" on-tap="_editClicked"></paper-icon-button>
@@ -53,6 +51,7 @@
           <content></content>
         </paper-toolbar>
       </template>
+    </template>
   </template>
 
   <script>
@@ -74,8 +73,12 @@
           reflectToAttribute: true,
           notify: true,
         },
-        showEdit: Boolean,
-        showSave: Boolean
+        showEdit: {
+          type: Boolean,
+        },
+        showSave: {
+          type: Boolean,
+        }
       },
       _editChanged: function(edit) {
         let state = edit;
